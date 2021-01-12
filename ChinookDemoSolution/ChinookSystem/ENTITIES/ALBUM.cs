@@ -61,10 +61,10 @@ namespace ChinookSystem.ENTITIES
         //MANY TO ONE RELATIONSHIP!
         //Create the 1 end of the relationship in this entity.
 
-        public virtual ARTIST Artist { get; set; }
+        public virtual ARTIST ARTIST { get; set; }
 
-        //NOT VALID UNTIL THE TRACK ENTITY IS CODED
-        //public virtual ICollection<TRACK> TRACKs { get; set; }
+       
+        public virtual ICollection<TRACK> TRACKs { get; set; }
 
     }
 }

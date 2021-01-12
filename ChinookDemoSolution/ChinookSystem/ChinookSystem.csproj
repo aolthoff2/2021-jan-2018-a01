@@ -45,6 +45,9 @@
     <Compile Include="BLL\DUMMY.cs" />
     <Compile Include="ENTITIES\ALBUM.cs" />
     <Compile Include="ENTITIES\ARTIST.cs" />
+    <Compile Include="ENTITIES\GENRE.cs" />
+    <Compile Include="ENTITIES\MEDIATYPE.cs" />
+    <Compile Include="ENTITIES\TRACK.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VIEWMODELS\DUMMY.cs" />
   </ItemGroup>
