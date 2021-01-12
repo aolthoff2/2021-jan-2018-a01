@@ -25,10 +25,11 @@ namespace ChinookSystem.ENTITIES
 
         public int? AlbumID { get; set; }
         
+
+        [Required(ErrorMessage = "Media Type ID is required.")]
         public int MediaTypeID { get; set; }
 
         public int? GenreID { get; set; }
-
 
         [StringLength(220,ErrorMessage ="Composer is limited to 220 characters.")]
         public string Composer
@@ -37,9 +38,9 @@ namespace ChinookSystem.ENTITIES
             set { _Composer = string.IsNullOrEmpty(value) ? null : value; }
         }
 
-       
-
         public int Milliseconds { get; set; }
+
+        public int? Bytes { get; set; }
 
         public decimal UnitPrice { get; set; }
 
