@@ -35,5 +35,25 @@ namespace ChinookSystem.BLL
             }
         }
 
+        
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
+        public List<ArtistAlbums> Albums_GetAlbumsForArtist(int artistid)
+        {
+            using (var context = new ChinookSystemContext())
+            {
+                //LINQ to Entity
+
+                IEnumerable<ArtistAlbums> results = from x in context.ALBUMs
+                                                    where x.ArtistID == artistid
+                                                    select new ArtistAlbums
+                                                    {
+                                                        Title = x.Title,
+                                                        ReleaseYear = x.ReleaseYear,
+                                                        ArtistName = x.ARTIST.Name
+                                                    };
+                return results.ToList();
+            }
+        }
+
     }
 }
