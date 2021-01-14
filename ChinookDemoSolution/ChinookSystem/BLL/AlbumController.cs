@@ -49,7 +49,8 @@ namespace ChinookSystem.BLL
                                                     {
                                                         Title = x.Title,
                                                         ReleaseYear = x.ReleaseYear,
-                                                        ArtistName = x.ARTIST.Name
+                                                        ArtistName = x.ARTIST.Name,
+                                                        ArtistID = x.ArtistID
                                                     };
                 return results.ToList();
             }
