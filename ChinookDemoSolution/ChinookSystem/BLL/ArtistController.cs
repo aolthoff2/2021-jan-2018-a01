@@ -21,11 +21,11 @@ namespace ChinookSystem.BLL
         {
             using (var context = new ChinookSystemContext())
             {
-                IEnumerable<SelectionList> results = from x in context.ARTISTs
+                IEnumerable<SelectionList> results = from x in context.Artists
                                                      orderby x.Name
                                                 select new SelectionList
                                                 {
-                                                    ValueField = x.ArtistID,
+                                                    ValueField = x.ArtistId,
                                                     DisplayField = x.Name
                                                 };
                 return results.ToList();

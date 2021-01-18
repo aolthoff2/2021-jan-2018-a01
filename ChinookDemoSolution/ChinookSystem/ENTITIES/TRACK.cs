@@ -1,39 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-#region ADDITIONAL NAMESPACES
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-#endregion
-
 namespace ChinookSystem.ENTITIES
 {
-    [Table("Tracks")]
-    internal class TRACK
-    {
-        
-        private string _Composer;
-        [Key]
-        public int TrackID { get; set; }
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
 
-        [Required(ErrorMessage = "Track Name is required.")]
-        [StringLength(200, ErrorMessage = "Track Name is limited to 200 characters.")]
+    internal partial class Track
+    {
+        private string _Composer;
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Track()
+        {
+            InvoiceLines = new HashSet<InvoiceLine>();
+            PlaylistTracks = new HashSet<PlaylistTrack>();
+        }
+
+        public int TrackId { get; set; }
+
+        [Required(ErrorMessage ="Track Name is required.")]
+        [StringLength(200, ErrorMessage ="Track Name is limited to 200 characters.")]
         public string Name { get; set; }
 
-        public int? AlbumID { get; set; }
-        
+        public int? AlbumId { get; set; }
 
-        [Required(ErrorMessage = "Media Type ID is required.")]
-        public int MediaTypeID { get; set; }
 
-        public int? GenreID { get; set; }
+        [Required(ErrorMessage ="Media Type ID is required.")]
+        public int MediaTypeId { get; set; }
 
-        [StringLength(220,ErrorMessage ="Composer is limited to 220 characters.")]
-        public string Composer
-        {
+        public int? GenreId { get; set; }
+
+        [StringLength(220,ErrorMessage ="Composer Name is limited to 220 characters.")]
+        public string Composer {
             get { return _Composer; }
             set { _Composer = string.IsNullOrEmpty(value) ? null : value; }
         }
@@ -42,17 +40,19 @@ namespace ChinookSystem.ENTITIES
 
         public int? Bytes { get; set; }
 
+        [Column(TypeName = "numeric")]
         public decimal UnitPrice { get; set; }
 
+        public virtual Album Album { get; set; }
 
+        public virtual Genre Genre { get; set; }
 
-        //NAGIVATIONAL PROPERTIES
-        public virtual ALBUM ALBUM { get; set; }
-        public virtual GENRE GENRE { get; set; }
-        public virtual MEDIATYPE MEDIATYPE { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InvoiceLine> InvoiceLines { get; set; }
 
-        
+        public virtual MediaType MediaType { get; set; }
 
-
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PlaylistTrack> PlaylistTracks { get; set; }
     }
 }

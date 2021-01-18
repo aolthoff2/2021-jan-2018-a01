@@ -1,32 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-#region ADDITIONAL NAMESPACES
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-#endregion
-
 namespace ChinookSystem.ENTITIES
 {
-    [Table("Genres")]
-    internal class GENRE
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    internal partial class Genre
     {
         private string _Name;
-        [Key]
-        public int GenreID { get; set; }
-
-        [StringLength(120,ErrorMessage ="Genre Name is limited to 120 characters.")]
-        public string Name
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Genre()
         {
+            Tracks = new HashSet<Track>();
+        }
+
+        public int GenreId { get; set; }
+
+        [StringLength(120, ErrorMessage ="Genre Name is limited to 120 characters.")]
+        public string Name {
             get { return _Name; }
             set { _Name = string.IsNullOrEmpty(value) ? null : value; }
         }
 
-        //NAVIGATIONAL PROPERTIES
-
-        public virtual ICollection<TRACK> TRACKs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Track> Tracks { get; set; }
     }
 }
